@@ -9,29 +9,28 @@ import lombok.Data;
 public class Garcom {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
     @Column(name = "GAR_COD")
-    private Long ID;
+    private Long id;
 
     @Column(name = "GAR_NOM", length = 75)
-    private String NOME;
+    private String nome;
 
     @Column(name = "CLI_TEL", length = 150)
-    private String  TELEFONE;
+    private String  telefone;
 
     @Column(name = "CLI_CPF", length = 150)
-    private Float  CPF;
+    private Float  cpf;
 
     @Column(name = "GAR_IDA", length = 150)
-    private String IDADE;
+    private String idade;
 
     @Column(name = "GAR_CAR", length = 150)
-    private String CARTEIRA;
+    private String carteira;
 
     @Column(name = "GAR_END", length = 150)
-    private String ENDERECO;
+    private String endereco;
 
     @Column(name = "GAR_SAL", length = 150)
-    private Float SALARIO;
+    private Float salario;
 
 }

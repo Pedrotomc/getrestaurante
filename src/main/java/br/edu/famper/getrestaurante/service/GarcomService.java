@@ -1,33 +1,74 @@
 package br.edu.famper.getrestaurante.service;
 
 
+import br.edu.famper.getrestaurante.Repository.GarcomRepository;
+import br.edu.famper.getrestaurante.dto.ClienteDto;
+import br.edu.famper.getrestaurante.dto.GarcomDto;
+import br.edu.famper.getrestaurante.model.Cliente;
 import br.edu.famper.getrestaurante.model.Garcom;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class GarcomService {
     @Autowired
-    private br.edu.famper.getrestaurante.Repository.GarcomRepository garcomRepository;
+    private GarcomRepository garcomRepository;
 
-    @GetMapping
-    public Garcom salvar(Garcom garcom) {
+    public List<GarcomDto> getAllGarcom(){
+        return garcomRepository
+                .findAll()
+                .stream()
+                .map(garcom -> GarcomDto
+                        .builder()
+                        .nome(garcom.getNome())
+                        .id(garcom.getId())
+                        .build()
+                )
+                .toList();
+    }
+
+
+    public GarcomDto getGarcomById(Long id){
+        Garcom cid = garcomRepository.findById(id).orElseThrow();
+        return new GarcomDto()
+                .builder()
+                .nome(cid.getNome())
+                .id(cid.getId())
+                .build();
+    }
+
+    public Garcom saveGarcom(GarcomDto garcomDto){
+        Garcom garcom = new Garcom();
+        garcom.setNome(garcomDto.getNome());
+        garcom.setId(garcom.getId());
         return garcomRepository.save(garcom);
     }
 
-        public List<Garcom> buscarTodos() {
-        return garcomRepository.findAll();
+    public GarcomDto editGarcom(Long id, GarcomDto garcomDto){
+        Garcom garcom = garcomRepository.findById(id).orElseThrow();
+        garcom.setNome(garcomDto.getNome());
+        garcom.setId(garcomDto.getId());
+        Garcom garcomEdited = garcomRepository.save(garcom);
+        return new GarcomDto()
+                .builder()
+                .nome(garcomEdited.getNome())
+                .id(garcomEdited.getId())
+                .build();
     }
 
-    public Optional<Garcom> findById(Long id) {
-        return garcomRepository.findById(id);
-    }
-
-    public void deleteById(Long id) {
-        garcomRepository.deleteById(id);
+    public boolean deleteGarcom(Long id){
+        try{
+            Garcom garcom = garcomRepository.findById(id).orElseThrow();
+            garcomRepository.deleteById(id);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }

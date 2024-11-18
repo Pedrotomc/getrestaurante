@@ -9,26 +9,25 @@ import lombok.Data;
 public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
     @Column(name = "RES_COD")
-    private Long ID;
+    private Long id;
 
     @Column(name = "RES_NOM", length = 75)
-    private String NOME;
+    private String nome;
 
     @Column(name = "RES_END", length = 150)
-    private String ENDERECO;
+    private String endereco;
 
     @Column(name = "RES_TEL", length = 150)
-    private String  TELEFONE;
+    private String  telefone;
 
     @Column(name = "RES_HOR", length = 150)
-    private String  HORARIO;
+    private String  horario;
 
     @Column(name = "RES_EMA", length = 150)
-    private String EMAIL;
+    private String email;
 
     @Column(name = "RES_CNP", length = 150)
-    private String CNPJ;
+    private String cnpj;
 
 }

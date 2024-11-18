@@ -9,19 +9,18 @@ import lombok.Data;
 public class Cliente {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
         @Column(name = "CLI_COD")
-        private Long ID;
+        private Long id;
 
         @Column(name = "CLI_NOM", length = 75)
-        private String NOME;
+        private String nome;
 
         @Column(name = "CLI_TEL", length = 150)
-        private String  TELEFONE;
+        private String  telefone;
 
         @Column(name = "CLI_EMA", length = 150)
-        private String EMAIL;
+        private String email;
 
         @Column(name = "CLI_PED", length = 150)
-        private Integer PEDIDO;
+        private Integer pedido;
 }

@@ -11,7 +11,6 @@ public class Mesa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
     @Column(name = "MES_NUM")
-    private Long mesanum;
+    private Long id;
 }

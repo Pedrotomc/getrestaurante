@@ -14,24 +14,24 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
 
     @Column(name = "PED_COD")
-    private Long ID;
+    private Long id;
 
     @Column(name = "PED_HOR", length = 6)
-    private Date HORA;
+    private Date hora;
 
     @Column(name = "PED_DET", length = 75)
-    private String DETALHE;
+    private String detalhe;
 
     @Column(name = "PED_OBS", length = 150)
-    private String OBSERVACAO;
+    private String observacao;
 
     @Column(name = "PED_PRA", length = 150)
-    private String  PRATOS;
+    private String  pratos;
 
     @Column(name = "PED_CLI", length = 150)
-    private String CLIENTE;
+    private String cliente;
 
     @Column(name = "PED_MESA", length = 150)
-    private Integer MESA;
+    private Integer mesa;
 
 }
