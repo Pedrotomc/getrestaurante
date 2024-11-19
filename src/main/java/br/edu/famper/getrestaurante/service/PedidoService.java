@@ -1,27 +1,20 @@
 package br.edu.famper.getrestaurante.service;
 
-import br.edu.famper.getrestaurante.Repository.ClienteRepository;
 import br.edu.famper.getrestaurante.Repository.PedidoRepository;
-import br.edu.famper.getrestaurante.dto.ClienteDto;
 import br.edu.famper.getrestaurante.dto.PedidoDto;
-import br.edu.famper.getrestaurante.model.Cliente;
 import br.edu.famper.getrestaurante.model.Pedido;
-import br.edu.famper.getrestaurante.model.Restaurante;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class PedidoService {
-    @Autowired
-    private PedidoService pedidoService;
+
     @Autowired
     private PedidoRepository pedidoRepository;
 
