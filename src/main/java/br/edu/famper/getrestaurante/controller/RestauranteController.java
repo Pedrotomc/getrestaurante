@@ -1,7 +1,7 @@
 package br.edu.famper.getrestaurante.controller;
 
 import br.edu.famper.getrestaurante.dto.RestauranteDto;
-import br.edu.famper.getrestaurante.exeption.ResourceNotFountException;
+import br.edu.famper.getrestaurante.exeption.ResourceNotFoundException;
 import br.edu.famper.getrestaurante.model.Restaurante;
 import br.edu.famper.getrestaurante.service.RestauranteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +54,7 @@ public class RestauranteController {
             @ApiResponse(responseCode = "200", description = "successful"),
             @ApiResponse(responseCode = "404", description = "not fund")
     })
-    public ResponseEntity<RestauranteDto> getRestauranteById(@PathVariable(name = "id") Long id) throws ResourceNotFountException {
+    public ResponseEntity<RestauranteDto> getRestauranteById(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
         log.info("Buscando restaurante por id: {}", id);
         return (ResponseEntity<RestauranteDto>) restauranteService.getAllRestaurante();
     }
@@ -62,7 +62,7 @@ public class RestauranteController {
     @Operation(summary = "Save restaurant",
             description = "Save a restaurant in database"
     )
-    public Restaurante createRestaurante(@RequestBody RestauranteDto restauranteDto) throws ResourceNotFountException {
+    public Restaurante createRestaurante(@RequestBody RestauranteDto restauranteDto) throws ResourceNotFoundException {
         log.info("Cadastro cliente: {}", restauranteDto);
         return restauranteService.saveRestaurante(restauranteDto);
     }
@@ -71,7 +71,7 @@ public class RestauranteController {
     @Operation(summary = "Update restaurant",
             description = "Update a restaurant in database"
     )
-    public ResponseEntity<RestauranteDto> updateRestaurante(@PathVariable(name = "id") Long id, @RequestBody RestauranteDto restauranteDto) throws ResourceNotFountException {
+    public ResponseEntity<RestauranteDto> updateRestaurante(@PathVariable(name = "id") Long id, @RequestBody RestauranteDto restauranteDto) throws ResourceNotFoundException {
         log.info("Atualizando cliene: {}", restauranteDto);
         return ResponseEntity.ok(restauranteService.editRestaurante(id, restauranteDto));
     }

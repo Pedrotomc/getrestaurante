@@ -10,9 +10,9 @@ import java.util.Date;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(ResourceNotFountException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> resourceNotFoundException(
-            ResourceNotFountException ex,
+            ResourceNotFoundException ex,
             WebRequest request
     ){
         ErrorResponse errorDetails = new ErrorResponse(

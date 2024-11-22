@@ -1,7 +1,7 @@
 package br.edu.famper.getrestaurante.controller;
 
 import br.edu.famper.getrestaurante.dto.GarcomDto;
-import br.edu.famper.getrestaurante.exeption.ResourceNotFountException;
+import br.edu.famper.getrestaurante.exeption.ResourceNotFoundException;
 import br.edu.famper.getrestaurante.model.Garcom;
 import br.edu.famper.getrestaurante.service.GarcomService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +52,7 @@ public class GarcomController {
             @ApiResponse(responseCode = "200", description = "successful"),
             @ApiResponse(responseCode = "404", description = "not fund")
     })
-    public ResponseEntity<GarcomDto> getGarcomById(@PathVariable(name = "id") Long id) throws ResourceNotFountException {
+    public ResponseEntity<GarcomDto> getGarcomById(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
         log.info("Buscando cidade por id: {}", id);
         return (ResponseEntity<GarcomDto>) garcomService.getAllGarcom();
     }
@@ -60,7 +60,7 @@ public class GarcomController {
     @Operation(summary = "Save city",
             description = "Save a city in database"
     )
-    public Garcom createGarcom(@RequestBody GarcomDto garcomDto) throws ResourceNotFountException {
+    public Garcom createGarcom(@RequestBody GarcomDto garcomDto) throws ResourceNotFoundException {
         log.info("Cadastro cidade: {}", garcomDto);
         return garcomService.saveGarcom(garcomDto);
     }
@@ -69,7 +69,7 @@ public class GarcomController {
     @Operation(summary = "Update city",
             description = "Update a city in database"
     )
-    public ResponseEntity<GarcomDto> updateGarcom(@PathVariable(name = "id") Long id, @RequestBody GarcomDto garcomDto) throws ResourceNotFountException {
+    public ResponseEntity<GarcomDto> updateGarcom(@PathVariable(name = "id") Long id, @RequestBody GarcomDto garcomDto) throws ResourceNotFoundException {
         log.info("Atualizando cidade: {}", garcomDto);
         return ResponseEntity.ok(garcomService.editGarcom(id, garcomDto));
     }

@@ -1,7 +1,7 @@
 package br.edu.famper.getrestaurante.controller;
 
 import br.edu.famper.getrestaurante.dto.PedidoDto;
-import br.edu.famper.getrestaurante.exeption.ResourceNotFountException;
+import br.edu.famper.getrestaurante.exeption.ResourceNotFoundException;
 import br.edu.famper.getrestaurante.model.Pedido;
 import br.edu.famper.getrestaurante.service.PedidoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +52,7 @@ public class PedidoController {
             @ApiResponse(responseCode = "200", description = "successful"),
             @ApiResponse(responseCode = "404", description = "not fund")
     })
-    public ResponseEntity<PedidoDto> getPedidoById(@PathVariable(name = "id") Long id) throws ResourceNotFountException {
+    public ResponseEntity<PedidoDto> getPedidoById(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
         log.info("Buscando pedido por id: {}", id);
         return (ResponseEntity<PedidoDto>) pedidoService.getAllPedido();
     }
@@ -60,7 +60,7 @@ public class PedidoController {
     @Operation(summary = "Save order",
             description = "Save a order in database"
     )
-    public Pedido createPedido(@RequestBody PedidoDto pedidoDto) throws ResourceNotFountException {
+    public Pedido createPedido(@RequestBody PedidoDto pedidoDto) throws ResourceNotFoundException {
         log.info("Cadastro cliente: {}", pedidoDto);
         return pedidoService.savePedido(pedidoDto);
     }
@@ -69,7 +69,7 @@ public class PedidoController {
     @Operation(summary = "Update order",
             description = "Update a order in database"
     )
-    public ResponseEntity<PedidoDto> updatePedido(@PathVariable(name = "id") Long id, @RequestBody PedidoDto pedidoDto) throws ResourceNotFountException {
+    public ResponseEntity<PedidoDto> updatePedido(@PathVariable(name = "id") Long id, @RequestBody PedidoDto pedidoDto) throws ResourceNotFoundException {
         log.info("Atualizando pedido: {}", pedidoDto);
         return ResponseEntity.ok(pedidoService.editPedido(id, pedidoDto));
     }

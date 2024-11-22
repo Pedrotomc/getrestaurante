@@ -1,7 +1,7 @@
 package br.edu.famper.getrestaurante.controller;
 
 import br.edu.famper.getrestaurante.dto.ClienteDto;
-import br.edu.famper.getrestaurante.exeption.ResourceNotFountException;
+import br.edu.famper.getrestaurante.exeption.ResourceNotFoundException;
 import br.edu.famper.getrestaurante.model.Cliente;
 import br.edu.famper.getrestaurante.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/cliente")
@@ -27,7 +26,7 @@ import java.util.Optional;
         description = "Operation for clientes")
 public class ClienteController {
 
-    private final ClienteService clientService;
+    private final ClienteService clienteService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -41,7 +40,7 @@ public class ClienteController {
 })
 public List<ClienteDto> getAllCliente() {
     log.info("Buscando clientes");
-    return clientService.getAllCliente();
+    return clienteService.getAllCliente();
     }
 
     @GetMapping("/{id}")
@@ -54,27 +53,28 @@ public List<ClienteDto> getAllCliente() {
             @ApiResponse(responseCode = "200", description = "successful"),
             @ApiResponse(responseCode = "404", description = "not fund")
     })
-    public ResponseEntity<ClienteDto> getClienteById(@PathVariable(name = "id") Long id) throws ResourceNotFountException {
+    public ResponseEntity<ClienteDto> getClienteById(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
         log.info("Buscando cliente por id: {}", id);
-        return (ResponseEntity<ClienteDto>) clientService.getAllCliente();
+        return (ResponseEntity<ClienteDto>) clienteService.getAllCliente();
     }
     @PostMapping
     @Operation(summary = "Save customer",
             description = "Save a customer in database"
     )
-    public Cliente createCliente(@RequestBody ClienteDto clienteDto) throws ResourceNotFountException {
+    public Cliente createCliente(@RequestBody ClienteDto clienteDto) throws ResourceNotFoundException {
         log.info("Cadastro cliente: {}", clienteDto);
-        return clientService.saveCliente(clienteDto);
+        return clienteService.saveCliente(clienteDto);
     }
 
     @PatchMapping("/{id}")
     @Operation(summary = "Update customer",
             description = "Update a customer in database"
     )
-    public ResponseEntity<ClienteDto> updateCliente(@PathVariable(name = "id") Long id, @RequestBody ClienteDto clienteDto) throws ResourceNotFountException {
-        log.info("Atualizando cliene: {}", clienteDto);
-        return ResponseEntity.ok(clientService.editCliente(id, clienteDto));
+    public ResponseEntity<ClienteDto> updateCliente(@PathVariable(name = "id") Long id, @RequestBody ClienteDto clienteDto) throws ResourceNotFoundException {
+        log.info("Atualizando cliente: {}", clienteDto);
+        return ResponseEntity.ok(clienteService.editCliente(id, clienteDto));
     }
+
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Remove customer",
@@ -83,7 +83,7 @@ public List<ClienteDto> getAllCliente() {
     public Map<String, Boolean> deleteCliente(@PathVariable(name = "id") Long id) throws Exception {
         log.info("Deletando cliente: {}", id);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", clientService.deleteCliente(id));
+        response.put("deleted", clienteService.deleteCliente(id));
         return response;
     }
 }

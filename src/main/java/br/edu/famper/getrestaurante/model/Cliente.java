@@ -18,9 +18,6 @@ public class Cliente {
         @Column(name = "CLI_TEL", length = 150)
         private String  telefone;
 
-        @Column(name = "CLI_EMA", length = 150)
-        private String email;
-
         @Column(name = "CLI_PED", length = 150)
         private Integer pedido;
 }

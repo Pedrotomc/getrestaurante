@@ -1,11 +1,8 @@
 package br.edu.famper.getrestaurante.controller;
 
-import br.edu.famper.getrestaurante.dto.ClienteDto;
 import br.edu.famper.getrestaurante.dto.MesaDto;
-import br.edu.famper.getrestaurante.exeption.ResourceNotFountException;
-import br.edu.famper.getrestaurante.model.Cliente;
+import br.edu.famper.getrestaurante.exeption.ResourceNotFoundException;
 import br.edu.famper.getrestaurante.model.Mesa;
-import br.edu.famper.getrestaurante.service.ClienteService;
 import br.edu.famper.getrestaurante.service.MesaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/mesa")
@@ -57,7 +52,7 @@ public class MesaController {
             @ApiResponse(responseCode = "200", description = "successful"),
             @ApiResponse(responseCode = "404", description = "not fund")
     })
-    public ResponseEntity<MesaDto> getMesaById(@PathVariable(name = "id") Long id) throws ResourceNotFountException {
+    public ResponseEntity<MesaDto> getMesaById(@PathVariable(name = "id") Long id) throws ResourceNotFoundException {
         log.info("Buscando mesa por id: {}", id);
         return (ResponseEntity<MesaDto>) mesaService.getAllMesa();
     }
@@ -65,7 +60,7 @@ public class MesaController {
     @Operation(summary = "Save table",
             description = "Save a table in database"
     )
-    public Mesa createMesa(@RequestBody MesaDto mesaDto) throws ResourceNotFountException {
+    public Mesa createMesa(@RequestBody MesaDto mesaDto) throws ResourceNotFoundException {
         log.info("Cadastro mesa: {}", mesaDto);
         return mesaService.saveMesa(mesaDto);
     }
@@ -74,7 +69,7 @@ public class MesaController {
     @Operation(summary = "Update table",
             description = "Update a table in database"
     )
-    public ResponseEntity<MesaDto> updateMesa(@PathVariable(name = "id") Long id, @RequestBody MesaDto mesaDto) throws ResourceNotFountException {
+    public ResponseEntity<MesaDto> updateMesa(@PathVariable(name = "id") Long id, @RequestBody MesaDto mesaDto) throws ResourceNotFoundException {
         log.info("Atualizando mesa: {}", mesaDto);
         return ResponseEntity.ok(mesaService.editMesa(id, mesaDto));
     }

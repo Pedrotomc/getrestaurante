@@ -56,4 +56,9 @@ public class GarcomDto {
             title = "SALARIO",
             maxLength = 100)
     private String salario;
+
+    @Schema(description = "ID DO RESTAURANTE",
+            example = "9999",
+            title = "ID")
+    private String restaurante;
 }

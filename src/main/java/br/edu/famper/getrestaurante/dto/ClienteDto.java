@@ -28,11 +28,6 @@ public class ClienteDto {
             maxLength = 15)
     private String telefone;
 
-    @Schema(description = "EMAIL DO CLIENTE",
-            example = "cliente@example.com",
-            title = "EMAIL",
-            maxLength = 100)
-    private String email;
 
     @Schema(description = "PEDIDO DO CLIENTE",
             example = "Pedido #12345",
